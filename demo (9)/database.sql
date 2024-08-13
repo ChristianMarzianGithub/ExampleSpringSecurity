@@ -11,3 +11,7 @@ CREATE SEQUENCE CUSTOMER_SEQ
     START WITH 1
     INCREMENT BY 1
     CACHE 10;
+
+--Test data
+INSERT INTO CUSTOMER (ID, EMAIL, PASSWORD, ROLE)
+VALUES ('1', 'admin@example.com', '{bcrypt}$2a$12$/fOPV31EH3jAjkwhRyCJAe8kZZr5NusLwq.c3.eiviTy5I9oyJcD.', 'admin');
