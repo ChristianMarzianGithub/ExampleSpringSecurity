@@ -1,8 +1,10 @@
 package com.example.demo.config;
 
+import com.example.demo.model.Customer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,9 +17,12 @@ public class ProjectSecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/getExample").authenticated()
-                .requestMatchers("/api").permitAll()
+
+
+        http.csrf(csrfConfig -> csrfConfig.disable())
+                .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/getExample","/changePassword").authenticated()
+                .requestMatchers("/api","/createNewCustomer").permitAll()
         );
 
         http.formLogin(withDefaults());

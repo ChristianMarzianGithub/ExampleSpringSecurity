@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name="CUSTOMER")
+@SequenceGenerator(name = Customer.ID_GENERATOR, sequenceName = Customer.SEQUENCE_NAME, allocationSize = 1)
 public class Customer {
 
     public static final String ID_GENERATOR = "SEQ_CUSTOMER";
@@ -13,7 +14,8 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Customer.ID_GENERATOR)
-    public Long id;
+    @Getter
+    private Long id;
 
 
     @Column(name = "EMAIL")
@@ -31,8 +33,4 @@ public class Customer {
     @Setter
     private String role;
 
-    @SequenceGenerator(name = Customer.ID_GENERATOR, sequenceName = Customer.SEQUENCE_NAME, allocationSize = 1)
-    private Long getId(){
-        return id;
-    }
 }
