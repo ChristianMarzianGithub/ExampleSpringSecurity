@@ -1,9 +1,8 @@
 package com.example.demo.config;
 
-import com.example.demo.model.Customer;
+import com.example.demo.model.CustomerBE;
 import com.example.demo.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -22,12 +21,12 @@ public class ExampleUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        Customer customer =customerRepository.findByEmail(username).orElseThrow(
+        CustomerBE customerBE =customerRepository.findByEmail(username).orElseThrow(
                 () ->new UsernameNotFoundException("Userdetails not found for User: " + username)
         );
 
-        List<GrantedAuthority> authorities =List.of(new SimpleGrantedAuthority(customer.getRole()));
+        List<GrantedAuthority> authorities =List.of(new SimpleGrantedAuthority(customerBE.getRole()));
 
-        return new User(customer.getEmail(), customer.getPassword(), authorities);
+        return new User(customerBE.getEmail(), customerBE.getPassword(), authorities);
     }
 }

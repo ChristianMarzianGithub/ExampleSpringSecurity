@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Customer;
+import com.example.demo.model.CustomerBE;
 import com.example.demo.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ public class CustomerController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/createNewCustomer")
-    public ResponseEntity<String> createNewCustomer(@RequestBody Customer customer){
+    public ResponseEntity<String> createNewCustomer(@RequestBody CustomerBE customerBE){
         try{
-            customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-            Customer savedCustomer = customerRepository.save(customer);
+            customerBE.setPassword(passwordEncoder.encode(customerBE.getPassword()));
+            CustomerBE savedCustomerBE = customerRepository.save(customerBE);
 
-            if(savedCustomer.getId() > 0){
+            if(savedCustomerBE.getId() > 0){
                 return ResponseEntity.status(HttpStatus.CREATED)
                         .body("Given user details are successfully registered");
             }else{

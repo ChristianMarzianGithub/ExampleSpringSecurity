@@ -27,19 +27,14 @@ CREATE SEQUENCE AUTHORITIES_SEQ
 	CACHE 10;
 
 
-
-
 --Test data
-INSERT INTO CUSTOMER (ID, EMAIL, PASSWORD, ROLE)
-VALUES 
-('1', 'admin@example.com', '{bcrypt}$2a$12$/fOPV31EH3jAjkwhRyCJAe8kZZr5NusLwq.c3.eiviTy5I9oyJcD.', 'admin');
+INSERT INTO DB2INST1.AUTHORITIES (ID,CUSTOMER_ID,NAME) VALUES
+	 (1,1,'VIEW_SITE_ONE'),
+	 (2,1,'VIEW_SITE_TWO'),
+	 (3,1,'VIEW_SITE_THREE'),
+	 (4,2,'VIEW_SITE_ONE'),
+	 (5,2,'VIEW_SITE_TWO');
 
-
-INSERT INTO AUTHORITIES 
-(ID, CUSTOMER_ID, NAME)
-VALUES
-('1','1','VIEW_SITE_ONE'),
-('2','1','VIEW_SITE_TWO'),
-('3','1','VIEW_SITE_THREE');
-
-
+INSERT INTO DB2INST1.CUSTOMER (ID,EMAIL,PASSWORD,"ROLE") VALUES
+	 (1,'admin@example.com','{bcrypt}$2a$12$ONwecI4uUr37Ue7FPsDSdeDQUs6RwkUppzwjAgikZMPicmu9K690.','admin'),
+	 (2,'user@example.com','{bcrypt}$2a$12$ONwecI4uUr37Ue7FPsDSdeDQUs6RwkUppzwjAgikZMPicmu9K690.','user');
