@@ -27,6 +27,7 @@ CREATE SEQUENCE AUTHORITIES_SEQ
 	CACHE 10;
 
 
+<<<<<<< HEAD
 --Test data
 INSERT INTO DB2INST1.AUTHORITIES (ID,CUSTOMER_ID,NAME) VALUES
 	 (1,1,'VIEW_SITE_ONE'),
@@ -38,3 +39,21 @@ INSERT INTO DB2INST1.AUTHORITIES (ID,CUSTOMER_ID,NAME) VALUES
 INSERT INTO DB2INST1.CUSTOMER (ID,EMAIL,PASSWORD,"ROLE") VALUES
 	 (1,'admin@example.com','{bcrypt}$2a$12$ONwecI4uUr37Ue7FPsDSdeDQUs6RwkUppzwjAgikZMPicmu9K690.','admin'),
 	 (2,'user@example.com','{bcrypt}$2a$12$ONwecI4uUr37Ue7FPsDSdeDQUs6RwkUppzwjAgikZMPicmu9K690.','user');
+=======
+
+
+--Test data
+INSERT INTO CUSTOMER (ID, EMAIL, PASSWORD, ROLE)
+VALUES 
+('1', 'admin@example.com', '{bcrypt}$2a$12$/fOPV31EH3jAjkwhRyCJAe8kZZr5NusLwq.c3.eiviTy5I9oyJcD.', 'admin');
+
+
+INSERT INTO AUTHORITIES 
+(ID, CUSTOMER_ID, NAME)
+VALUES
+('1','1','VIEW_SITE_ONE'),
+('2','1','VIEW_SITE_TWO'),
+('3','1','VIEW_SITE_THREE');
+
+
+>>>>>>> 983c584 (added authorities)
