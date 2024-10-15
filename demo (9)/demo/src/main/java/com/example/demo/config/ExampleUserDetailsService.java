@@ -19,13 +19,14 @@ public class ExampleUserDetailsService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        CustomerBE customerBE =customerRepository.findByEmail(username).orElseThrow(
-                () ->new UsernameNotFoundException("Userdetails not found for User: " + username)
+   @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        CustomerBE customerBE = customerRepository.findByEmail(username).orElseThrow(
+                () -> new UsernameNotFoundException("User \"" + username + "\"not found")
         );
-
-        List<GrantedAuthority> authorities =List.of(new SimpleGrantedAuthority(customerBE.getRole()));
+        List<SimpleGrantedAuthority> authorities =customerBE.getAuthorities().stream().map(
+                authority -> new SimpleGrantedAuthority(authority.getNAME())
+        ).toList();
 
         return new User(customerBE.getEmail(), customerBE.getPassword(), authorities);
     }
